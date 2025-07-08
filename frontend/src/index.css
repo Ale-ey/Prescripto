@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+/* index.css */
+@theme inline {
+    
+  /* custom colors  */
+  --color-primaryBlue:  #5f6FFF;
+  --color-secondaryBlack: #363636;
+ 
+}
+
