@@ -14,7 +14,14 @@ export const SpecialityMenu = () => {
       </p>
       <div className="flex sm:justify-center gap-4 w-full py-4 overflow-scroll">
         {specialityData.map((item, index) => (
-          <Link className="flex  flex-col items-center text-xs cursor-pointer flex-shrink-0 hover:translate-y-[-10px] duration-500" key={index} to={`docters/${item.speciality}`}>
+          <Link
+            onClick={() => {
+              scrollTo(0, 0);
+            }}
+            className="flex  flex-col items-center text-xs cursor-pointer flex-shrink-0 hover:translate-y-[-10px] duration-500"
+            key={index}
+            to={`docters/${item.speciality}`}
+          >
             <img className="w-16 sm:w-24 my-2" src={item.image} alt="" />
             <p>{item.speciality}</p>
           </Link>
