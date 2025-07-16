@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { assets } from "../assets/assets";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 export const NavBar = () => {
   const navigate = useNavigate();
   const handleCreateAccount = () => {
@@ -10,7 +10,14 @@ export const NavBar = () => {
   const [token, setToken] = useState(true);
   return (
     <div className="flex items-center justify-between text-sm py-4 mb-5 border-b border-b-gray-400">
-      <img src={assets.logo} alt="logo" className="w-44 cursor-pointer" />
+      <Link to={"/"}>
+        <img
+          to="/"
+          src={assets.logo}
+          alt="logo"
+          className="w-44 cursor-pointer"
+        />
+      </Link>
       <ul className="hidden md:flex items-start gap-5 font-medium">
         <li className="py-1">
           <NavLink
