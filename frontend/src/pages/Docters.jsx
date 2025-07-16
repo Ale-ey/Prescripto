@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 
 export const Docters = () => {
   const { speciality } = useParams();
   const [filterDoc, setFilterDoc] = useState([]);
   const { doctors } = useContext(AppContext);
+  const navigate = useNavigate();
 
   const filterdocs = () => {
     if (speciality) {
@@ -15,10 +16,15 @@ export const Docters = () => {
     }
   };
 
-
   useEffect(() => {
     filterdocs();
-  }, [doctors, filterDoc]);
+  }, [doctors, speciality]);
+
+  const handleSpecialityClick = (selectedSpeciality) => {
+    speciality === selectedSpeciality
+      ? navigate("/docters")
+      : navigate(`/docters/${selectedSpeciality}`);
+  };
 
   return (
     <div>
@@ -28,6 +34,7 @@ export const Docters = () => {
       <div className="flex flex-col sm:flex-row items-start gap-4 mt-5">
         <div className="flex flex-col gap-4 text-sm text-gray-600">
           <p
+            onClick={() => handleSpecialityClick("General physician")}
             className={`w-[94vw] sm:w-auto pl-3 py-1 pr-16 border border-gray-600 rounded transition-all cursor-pointer ${
               speciality === "General physician"
                 ? "bg-indigo-100 text-black"
@@ -37,6 +44,7 @@ export const Docters = () => {
             General physician
           </p>
           <p
+            onClick={() => handleSpecialityClick("Gynecologist")}
             className={`w-[94vw] sm:w-auto pl-3 py-1 pr-16 border border-gray-600 rounded transition-all cursor-pointer ${
               speciality === "Gynecologist" ? "bg-indigo-100 text-black" : ""
             }`}
@@ -44,6 +52,7 @@ export const Docters = () => {
             Gynecologist
           </p>
           <p
+            onClick={() => handleSpecialityClick("Dermatologist")}
             className={`w-[94vw] sm:w-auto pl-3 py-1 pr-16 border border-gray-600 rounded transition-all cursor-pointer ${
               speciality === "Dermatologist" ? "bg-indigo-100 text-black" : ""
             }`}
@@ -51,6 +60,7 @@ export const Docters = () => {
             Dermatologist
           </p>
           <p
+            onClick={() => handleSpecialityClick("Pediatricians")}
             className={`w-[94vw] sm:w-auto pl-3 py-1 pr-16 border border-gray-600 rounded transition-all cursor-pointer ${
               speciality === "Pediatricians" ? "bg-indigo-100 text-black" : ""
             }`}
@@ -58,6 +68,7 @@ export const Docters = () => {
             Pediatricians
           </p>
           <p
+            onClick={() => handleSpecialityClick("Neurologist")}
             className={`w-[94vw] sm:w-auto pl-3 py-1 pr-16 border border-gray-600 rounded transition-all cursor-pointer ${
               speciality === "Neurologist" ? "bg-indigo-100 text-black" : ""
             }`}
@@ -65,6 +76,7 @@ export const Docters = () => {
             Neurologist
           </p>
           <p
+            onClick={() => handleSpecialityClick("Gastroenterologist")}
             className={`w-[94vw] sm:w-auto pl-3 py-1 pr-16 border border-gray-600 rounded transition-all cursor-pointer ${
               speciality === "Gastroenterologist"
                 ? "bg-indigo-100 text-black"
