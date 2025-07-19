@@ -90,7 +90,7 @@ export const NavBar = () => {
                 </p>
                 <p
                   onClick={() => {
-                    navigate("/my-appointments");
+                    navigate("/my-appoitments");
                   }}
                   className="cursor-pointer hover:text-black"
                 >
