@@ -6,6 +6,7 @@ export const Docters = () => {
   const { speciality } = useParams();
   const [filterDoc, setFilterDoc] = useState([]);
   const { doctors } = useContext(AppContext);
+  const [showFilter, setShowFilter] = useState(false);
   const navigate = useNavigate();
 
   const filterdocs = () => {
@@ -22,8 +23,8 @@ export const Docters = () => {
 
   const handleSpecialityClick = (selectedSpeciality) => {
     speciality === selectedSpeciality
-      ? navigate("/docters")
-      : navigate(`/docters/${selectedSpeciality}`);
+      ? navigate("/doctors")
+      : navigate(`/doctors/${selectedSpeciality}`);
   };
 
   return (
@@ -32,7 +33,19 @@ export const Docters = () => {
         Browse through the doctors specialist.
       </p>
       <div className="flex flex-col sm:flex-row items-start gap-4 mt-5">
-        <div className="flex flex-col gap-4 text-sm text-gray-600">
+        <button
+          className={`py-1 px-3 cursor-pointer border rounded text-sm transition-all sm:hidden ${
+            showFilter ? "text-white bg-primaryBlue" : ""
+          }`}
+          onClick={() => setShowFilter(!showFilter)}
+        >
+          Filters
+        </button>
+        <div
+          className={`${
+            showFilter ? "flex" : "hidden"
+          }  flex-col gap-4 text-sm text-gray-600`}
+        >
           <p
             onClick={() => handleSpecialityClick("General physician")}
             className={`w-[94vw] sm:w-auto pl-3 py-1 pr-16 border border-gray-600 rounded transition-all cursor-pointer ${
