@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
-import { assets } from "../assets/assets";
-
+import { assets, specialityData } from "../assets/assets";
+import { RelatedDoctors } from "../components/RelatedDoctors";
 export const Appointment = () => {
   const { docId } = useParams();
   const { doctors, currencySymbol } = useContext(AppContext);
@@ -150,9 +150,15 @@ export const Appointment = () => {
                 </p>
               ))}
           </div>
-          <button className="bg-primaryBlue text-white text-sm
-           px-14 py-3 rounded-full cursor-pointer">Book Appointment</button>
+          <button
+            className="bg-primaryBlue text-white text-sm
+           px-14 py-3 rounded-full cursor-pointer"
+          >
+            Book Appointment
+          </button>
         </div>
+        {/* listinng related doctors  */}
+        <RelatedDoctors docId={docId} speciality={docInfo.speciality} />
       </div>
     )
   );
