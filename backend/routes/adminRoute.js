@@ -1,7 +1,8 @@
 import express from "express";
 import multer from "multer";
-import { addDoctor } from "../controllers/adminController.js";
+import { addDoctor, loginAdmin } from "../controllers/adminController.js";
 import upload from "../middlewares/multer.js";
+import authAdmin from "../middlewares/authAdmin.js";
 
 const adminRouter = express.Router();
 
@@ -24,9 +25,12 @@ const handleMulterError = (error, req, res, next) => {
 
 adminRouter.post(
   "/add-doctor",
+
+  authAdmin,
   upload.single("image"),
   handleMulterError,
   addDoctor
 );
+adminRouter.post("/login", loginAdmin);
 
 export default adminRouter;
