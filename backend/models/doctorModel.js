@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { type } from "os";
 
 // its only define scheme structure
 const doctorScheme = new mongoose.Schema(

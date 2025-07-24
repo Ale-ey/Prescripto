@@ -1,7 +1,8 @@
 import { log } from "console";
 import bcrypt from "bcrypt";
-import { v2 as cloudaniry } from "cloudinary";
-import doctorModel from "../models/doctorModel";
+import { v2 as cloudinary } from "cloudinary";
+import validator from "validator";
+import doctorModel from "../models/doctorModel.js";
 // api for add doctor
 const addDoctor = async (req, res) => {
   try {
@@ -17,6 +18,11 @@ const addDoctor = async (req, res) => {
       address,
     } = req.body;
     const imageFile = req.file;
+
+    // Check if image file is provided
+    if (!imageFile) {
+      return res.json({ success: false, message: "Image file is required." });
+    }
 
     // checking for all data to add doctor
     if (
@@ -49,8 +55,8 @@ const addDoctor = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedpassword = await bcrypt.hash(password, salt);
 
-    //upload img to cloudaniry
-    const imageUpload = await cloudaniry.uploader.upload(imageFile.path, {
+    //upload img to cloudinary
+    const imageUpload = await cloudinary.uploader.upload(imageFile.path, {
       resource_type: "image",
     });
 
@@ -78,5 +84,5 @@ const addDoctor = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-10;
+
 export { addDoctor };
